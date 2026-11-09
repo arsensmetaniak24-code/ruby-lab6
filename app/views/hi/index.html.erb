@@ -1,0 +1,12 @@
+<html>
+<head><title>Hi <%= @stud %>!</title></head>
+<body>
+<h1>Hello, <%= @stud %>!</h1>
+
+<% 5.times do |i| %>
+  <p> <%= "Моє повідомлення #{i} #{@message}" %>
+<% end %>
+
+<p>Сторінку відкрито о <%= @time %></p>
+</body>
+</html>
