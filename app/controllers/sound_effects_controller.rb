@@ -4,7 +4,7 @@ class SoundEffectsController < ApplicationController
 
   # GET /sound_effects or /sound_effects.json
   def index
-    @sound_effects = SoundEffect.includes(:user)
+    @sound_effects = SoundEffect.includes(:user).with_attached_image
     @sound_effects = @sound_effects.where(category: params[:category]) if params[:category].present?
   end
 
@@ -74,6 +74,6 @@ class SoundEffectsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def sound_effect_params
-    params.expect(sound_effect: [:title, :description, :category, :duration])
+    params.expect(sound_effect: [:title, :description, :category, :duration, :image])
   end
 end

@@ -1,4 +1,7 @@
 <div id="<%= dom_id sound_effect %>" class="card h-100">
+  <% if sound_effect.image.attached? %>
+    <%= image_tag sound_effect.image.variant(resize_to_limit: [600, 400]), class: "card-img-top", alt: sound_effect.title %>
+  <% end %>
   <div class="card-body vstack gap-2">
     <div class="hstack gap-2">
       <h2 class="card-title h5 mb-0"><%= sound_effect.title %></h2>

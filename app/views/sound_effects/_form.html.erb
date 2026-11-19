@@ -36,6 +36,11 @@
   </div>
 
   <div>
+    <%= form.label :image, "Обкладинка (JPEG, PNG, WebP, до 5 МБ)", class: "form-label" %>
+    <%= form.file_field :image, accept: "image/jpeg,image/png,image/webp", class: "form-control" %>
+  </div>
+
+  <div>
     <%= form.submit sound_effect.persisted? ? "Зберегти зміни" : "Додати звук",
                     class: "btn-solid theme-primary" %>
   </div>
