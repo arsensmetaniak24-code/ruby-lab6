@@ -1,0 +1,11 @@
+<% content_for :title, "Редагування: #{@sound_effect.title}" %>
+
+<div class="card">
+  <div class="card-header hstack gap-2">
+    <h1 class="h3 mb-0">Редагування звукового ефекту</h1>
+    <%= link_to "Скасувати", @sound_effect, class: "btn-text theme-secondary ms-auto" %>
+  </div>
+  <div class="card-body">
+    <%= render "form", sound_effect: @sound_effect %>
+  </div>
+</div>

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get "about", to: "pages#about", as: :about
+  resources :sound_effects do
+    collection do
+      delete :destroy_all
+    end
+  end
   resources :users
   get "hi/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -12,5 +18,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "sound_effects#index"
 end

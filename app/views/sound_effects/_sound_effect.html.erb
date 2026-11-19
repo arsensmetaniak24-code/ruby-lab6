@@ -1,0 +1,19 @@
+<div id="<%= dom_id sound_effect %>" class="card h-100">
+  <div class="card-body vstack gap-2">
+    <div class="hstack gap-2">
+      <h2 class="card-title h5 mb-0"><%= sound_effect.title %></h2>
+      <span class="badge badge-subtle ms-auto"><%= sound_effect.category %></span>
+    </div>
+
+    <p class="small fg-3 mb-0">
+      Тривалість:
+      <%= number_with_precision(sound_effect.duration, precision: 2, strip_insignificant_zeros: true) || "—" %> с
+    </p>
+
+    <p class="mb-0"><%= truncate(sound_effect.description, length: 100) %></p>
+  </div>
+
+  <div class="card-footer">
+    <%= link_to "Переглянути", sound_effect, class: "btn-subtle theme-primary btn-sm" %>
+  </div>
+</div>

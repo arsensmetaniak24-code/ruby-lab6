@@ -1,0 +1,28 @@
+<% content_for :title, @sound_effect.title %>
+
+<div class="card">
+  <div class="card-header hstack gap-2">
+    <h1 class="h3 mb-0"><%= @sound_effect.title %></h1>
+    <%= link_to @sound_effect.category, sound_effects_path(category: @sound_effect.category),
+                class: "badge badge-subtle ms-auto" %>
+  </div>
+
+  <div class="card-body vstack gap-3">
+    <div>
+      <h2 class="h6 fg-3 mb-1">Опис</h2>
+      <%= simple_format(@sound_effect.description, class: "mb-0") %>
+    </div>
+
+    <div>
+      <h2 class="h6 fg-3 mb-1">Тривалість</h2>
+      <%= number_with_precision(@sound_effect.duration, precision: 2, strip_insignificant_zeros: true) || "—" %> с
+    </div>
+  </div>
+
+  <div class="card-footer hstack gap-2">
+    <%= link_to "Редагувати", edit_sound_effect_path(@sound_effect), class: "btn-solid theme-primary" %>
+    <%= button_to "Видалити", @sound_effect, method: :delete,
+                  class: "btn-outline theme-danger",
+                  form: { data: { turbo_confirm: "Видалити «#{@sound_effect.title}»?" } } %>
+  </div>
+</div>

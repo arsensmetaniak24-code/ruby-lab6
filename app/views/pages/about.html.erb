@@ -1,0 +1,97 @@
+<% content_for :title, "Про проєкт" %>
+
+<section class="mb-5">
+  <h1 class="mb-2">Про проєкт «Банк звукових ефектів»</h1>
+  <p class="fs-lg fg-3">
+    Веб-застосунок на Ruby on Rails для каталогізації звукових ефектів за категоріями
+    з можливістю попереднього прослуховування.
+  </p>
+</section>
+
+<section class="row g-4 mb-5">
+  <div class="md:col-6">
+    <div class="card h-100">
+      <div class="card-header fw-semibold">Тема</div>
+      <div class="card-body">
+        Лабораторна робота № 7-8. Робота з компонентами MVC-RoR проекту.
+      </div>
+    </div>
+  </div>
+
+  <div class="md:col-6">
+    <div class="card h-100">
+      <div class="card-header fw-semibold">Мета роботи</div>
+      <div class="card-body">
+        Навчитися створювати веб-аплікації із хедерами, футерами та Bootstrap.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mb-5">
+  <h2 class="mb-3">Завдання</h2>
+  <ol class="list-group list-group-numbered">
+    <li class="list-group-item">Відкрити проект ЛР6.</li>
+    <li class="list-group-item">Додати до проекту хедер і футер.</li>
+    <li class="list-group-item">У футері розмістити контактну інформацію про розробника.</li>
+    <li class="list-group-item">Приєднати до проекту фреймворк Bootstrap.</li>
+    <li class="list-group-item">Вибрати один із готових шаблонів у розділі Nav tab і розмістити його у хедері проекту.
+    </li>
+    <li class="list-group-item">
+      До пунктів навігаційної панелі приєднати відповідні маршрути та дії згідно з індивідуальним варіантом:
+      «Про проєкт», «Додати звук», «Всі звуки», «Видалити всі» (із підтвердженням дії).
+    </li>
+    <li class="list-group-item">Видалити дії, які є на сторінках і продубльовані в навбарі.</li>
+  </ol>
+</section>
+
+<section class="mb-5">
+  <h2 class="mb-3">Індивідуальний варіант № 29</h2>
+  <p>
+    <strong>Банк звукових ефектів:</strong> Nav tab за категоріями звуків (Природа, Урбан, Sci-Fi),
+    хедер із плеєром попереднього прослуховування, футер із типом ліцензії (Creative Commons).
+  </p>
+
+  <h3 class="h5 mt-4 mb-3">Категорії звуків</h3>
+  <div class="list-group mb-3">
+    <% SoundEffect::CATEGORIES.each do |category| %>
+      <%= link_to sound_effects_path(category: category),
+                  class: "list-group-item list-group-item-action hstack" do %>
+        <span><%= category %></span>
+        <span class="badge badge-subtle ms-auto"><%= @category_counts.fetch(category, 0) %></span>
+      <% end %>
+    <% end %>
+  </div>
+  <p class="small fg-3">Усього звукових ефектів у базі: <%= @total_count %>.</p>
+</section>
+
+<section class="mb-5">
+  <h2 class="mb-3">Реалізація</h2>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <strong>Модель <code>SoundEffect</code></strong>: назва (<code>title</code>), опис (<code>description</code>),
+      категорія (<code>category</code>), тривалість у секундах (<code>duration</code>).
+    </li>
+    <li class="list-group-item">
+      <strong>Хедер і футер</strong> винесені в partials <code>shared/_header</code> та <code>shared/_footer</code>
+      і підключені в загальному layout <code>application.html.erb</code>.
+    </li>
+    <li class="list-group-item">
+      <strong>Фільтр за категоріями</strong>: пункти меню передають параметр <code>?category=…</code>,
+      за яким контролер відбирає записи з БД.
+    </li>
+    <li class="list-group-item">
+      <strong>Плеєр</strong> у хедері побудований на HTML5-елементі <code>&lt;audio&gt;</code>.
+    </li>
+    <li class="list-group-item">
+      <strong>Оформлення</strong>: фреймворк Bootstrap 6 (компоненти Navbar, Drawer, Menu, Card, List group).
+    </li>
+  </ul>
+</section>
+
+<section class="mb-5">
+  <h2 class="mb-3">Технології</h2>
+  <p>
+    Ruby <%= RUBY_VERSION %> · Ruby on Rails <%= Rails.version %> · SQLite · Hotwire (Turbo) · Bootstrap 6
+  </p>
+</section>

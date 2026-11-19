@@ -1,0 +1,42 @@
+<%= form_with(model: sound_effect, class: "vstack gap-3") do |form| %>
+  <% if sound_effect.errors.any? %>
+    <div class="alert theme-danger">
+      <h2 class="alert-heading h6">
+        Не вдалося зберегти звуковий ефект (помилок: <%= sound_effect.errors.count %>):
+      </h2>
+      <ul class="mb-0">
+        <% sound_effect.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, "Назва", class: "form-label" %>
+    <%= form.text_field :title, class: "form-control", placeholder: "Наприклад: Шум дощу" %>
+  </div>
+
+  <div>
+    <%= form.label :description, "Опис", class: "form-label" %>
+    <%= form.textarea :description, class: "form-control", rows: 4 %>
+  </div>
+
+  <div class="row g-3">
+    <div class="md:col-6">
+      <%= form.label :category, "Категорія", class: "form-label" %>
+      <%= form.select :category, SoundEffect::CATEGORIES, { prompt: "Оберіть категорію" },
+                      class: "form-control form-control-caret" %>
+    </div>
+
+    <div class="md:col-6">
+      <%= form.label :duration, "Тривалість (с)", class: "form-label" %>
+      <%= form.number_field :duration, class: "form-control", min: 0, step: 0.1 %>
+    </div>
+  </div>
+
+  <div>
+    <%= form.submit sound_effect.persisted? ? "Зберегти зміни" : "Додати звук",
+                    class: "btn-solid theme-primary" %>
+  </div>
+<% end %>

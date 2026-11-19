@@ -1,0 +1,18 @@
+<% heading = params[:category].presence || "Всі звукові ефекти" %>
+<% content_for :title, heading %>
+
+<h1 class="mb-4"><%= heading %></h1>
+
+<% if @sound_effects.any? %>
+  <div id="sound_effects" class="row g-4">
+    <% @sound_effects.each do |sound_effect| %>
+      <div class="md:col-6 lg:col-4">
+        <%= render sound_effect %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="alert theme-info">
+    Тут поки немає жодного звукового ефекту. Скористайтеся пунктом «Додати звук» у меню.
+  </div>
+<% end %>
