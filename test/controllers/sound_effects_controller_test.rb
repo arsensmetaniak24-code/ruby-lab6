@@ -3,6 +3,7 @@ require "test_helper"
 class SoundEffectsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @sound_effect = sound_effects(:one)
+    sign_in users(:one)
   end
 
   test "should get index" do

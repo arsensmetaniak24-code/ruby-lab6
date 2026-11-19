@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :users
   get "about", to: "pages#about", as: :about
   resources :sound_effects do
     collection do
       delete :destroy_all
     end
   end
-  resources :users
+  resources :users, only: [:show]
   get "hi/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -17,6 +17,11 @@
       <h2 class="h6 fg-3 mb-1">Тривалість</h2>
       <%= number_with_precision(@sound_effect.duration, precision: 2, strip_insignificant_zeros: true) || "—" %> с
     </div>
+
+    <div>
+      <h2 class="h6 fg-3 mb-1">Автор</h2>
+      <%= link_to @sound_effect.user.name, @sound_effect.user %>
+    </div>
   </div>
 
   <div class="card-footer hstack gap-2">

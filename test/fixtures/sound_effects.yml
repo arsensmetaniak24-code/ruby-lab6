@@ -1,13 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyText
-  category: MyString
+  title: Шум дощу
+  description: Спокійний дощ по даху
+  category: Природа
   duration: 9.99
+  user: one
 
 two:
-  title: MyString
-  description: MyText
-  category: MyString
-  duration: 9.99
+  title: Лазерний постріл
+  description: Короткий звук бластера
+  category: Sci-Fi
+  duration: 1.5
+  user: two
+

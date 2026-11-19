@@ -1,9 +1,10 @@
 class SoundEffectsController < ApplicationController
+  before_action :authenticate_user!, except: %i[ index show ]
   before_action :set_sound_effect, only: %i[ show edit update destroy ]
 
   # GET /sound_effects or /sound_effects.json
   def index
-    @sound_effects = SoundEffect.all
+    @sound_effects = SoundEffect.includes(:user)
     @sound_effects = @sound_effects.where(category: params[:category]) if params[:category].present?
   end
 
@@ -21,8 +22,9 @@ class SoundEffectsController < ApplicationController
   end
 
   # POST /sound_effects or /sound_effects.json
+
   def create
-    @sound_effect = SoundEffect.new(sound_effect_params)
+    @sound_effect = current_user.sound_effects.build(sound_effect_params)
 
     respond_to do |format|
       if @sound_effect.save

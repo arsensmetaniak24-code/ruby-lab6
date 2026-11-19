@@ -1,10 +1,48 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, "Профіль: #{@user.name}" %>
 
-<%= render @user %>
+<div class="row g-4">
+  <div class="lg:col-4">
+    <div class="card h-100">
+      <div class="card-body vstack gap-3 text-center">
+        <%# Аватар-заглушка: перша літера імені %>
+        <div class="rounded-circle bg-subtle-primary fg-primary fw-bold fs-3xl mx-auto d-flex align-items-center justify-content-center"
+             style="width: 96px; height: 96px;">
+          <%= @user.name.to_s.first.upcase %>
+        </div>
 
-<div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
+        <div>
+          <h1 class="h3 mb-1"><%= @user.name %></h1>
+          <span class="badge <%= @user.admin? ? "theme-danger" : "badge-subtle" %>">
+            <%= @user.admin? ? "Адміністратор" : "Користувач" %>
+          </span>
+        </div>
 
-  <%= button_to "Destroy this user", @user, method: :delete %>
+        <% if current_user == @user %>
+          <%= link_to "Редагувати профіль", edit_user_registration_path, class: "btn-solid theme-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="lg:col-8">
+    <div class="card h-100">
+      <div class="card-header fw-semibold">Інформація</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item hstack gap-2">
+          <span class="fg-3">Email</span>
+          <span class="ms-auto"><%= mail_to @user.email %></span>
+        </li>
+        <li class="list-group-item hstack gap-2">
+          <span class="fg-3">Роль</span>
+          <span class="ms-auto"><%= @user.role %></span>
+        </li>
+        <li class="list-group-item hstack gap-2">
+          <span class="fg-3">Зареєстрований</span>
+          <span class="ms-auto"><%= @user.created_at.strftime("%d.%m.%Y") %></span>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
+
+<%# Етап 8: тут буде список звукових ефектів користувача (@user.sound_effects) %>

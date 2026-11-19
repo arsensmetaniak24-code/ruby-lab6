@@ -10,6 +10,11 @@
       <%= number_with_precision(sound_effect.duration, precision: 2, strip_insignificant_zeros: true) || "—" %> с
     </p>
 
+    <p class="small fg-3 mb-0">
+      Автор:
+      <%= link_to sound_effect.user.name, sound_effect.user %>
+    </p>
+
     <p class="mb-0"><%= truncate(sound_effect.description, length: 100) %></p>
   </div>
 
