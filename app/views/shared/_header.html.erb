@@ -42,12 +42,14 @@
               </div>
             </li>
 
-            <li class="nav-item">
-              <%= button_to "Видалити всі", destroy_all_sound_effects_path,
-                            method: :delete,
-                            class: "nav-link fg-danger",
-                            form: { data: { turbo_confirm: "Точно видалити ВСІ звукові ефекти?" } } %>
-            </li>
+            <% if current_user&.admin? %>
+              <li class="nav-item">
+                <%= button_to "Видалити всі", destroy_all_sound_effects_path,
+                              method: :delete,
+                              class: "nav-link fg-danger",
+                              form: { data: { turbo_confirm: "Точно видалити ВСІ звукові ефекти?" } } %>
+              </li>
+            <% end %>
           </ul>
 
           <div class="hstack gap-2">

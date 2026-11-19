@@ -11,4 +11,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
+
+  def require_admin!
+    return if current_user&.admin?
+    redirect_back fallback_location: root_path,
+                  alert: "Ця дія доступна лише адміністратору.",
+                  status: :see_other
+  end
 end

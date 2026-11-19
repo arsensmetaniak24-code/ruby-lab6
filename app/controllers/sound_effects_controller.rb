@@ -1,6 +1,8 @@
 class SoundEffectsController < ApplicationController
   before_action :authenticate_user!, except: %i[ index show ]
   before_action :set_sound_effect, only: %i[ show edit update destroy ]
+  before_action :authorize_owner!, only: %i[ edit update destroy ]
+  before_action :require_admin!, only: %i[ destroy_all ]
 
   # GET /sound_effects or /sound_effects.json
   def index
@@ -76,4 +78,11 @@ class SoundEffectsController < ApplicationController
   def sound_effect_params
     params.expect(sound_effect: [:title, :description, :category, :duration, :image])
   end
+
+  def authorize_owner!
+    return if @sound_effect.editable_by?(current_user)
+
+    redirect_to @sound_effect, alert: "Ви можете змінювати лише власні звукові ефекти.", status: :see_other
+  end
+
 end

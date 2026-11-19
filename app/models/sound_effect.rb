@@ -10,6 +10,10 @@ class SoundEffect < ApplicationRecord
   validates :duration, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 1000 }
   validate :acceptable_image
 
+  def editable_by?(user)
+    user.present? && (user.admin? || user_id == user.id)
+  end
+
   private
 
   def acceptable_image

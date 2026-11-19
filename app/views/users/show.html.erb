@@ -45,4 +45,41 @@
   </div>
 </div>
 
-<%# Етап 8: тут буде список звукових ефектів користувача (@user.sound_effects) %>
+<div class="card mt-4">
+  <div class="card-header hstack gap-2">
+    <h2 class="h5 mb-0">Звукові ефекти</h2>
+    <span class="badge badge-subtle"><%= @sound_effects.size %></span>
+    <% if current_user == @user %>
+      <%= link_to "Додати звук", new_sound_effect_path, class: "btn-subtle theme-primary btn-sm ms-auto" %>
+    <% end %>
+  </div>
+
+  <% if @sound_effects.any? %>
+    <ul class="list-group list-group-flush">
+      <% @sound_effects.each do |sound_effect| %>
+        <li class="list-group-item hstack gap-3">
+          <% if sound_effect.image.attached? %>
+            <%= image_tag sound_effect.image.variant(resize_to_fill: [48, 48]), class: "rounded", alt: "" %>
+          <% end %>
+
+          <div>
+            <%= link_to sound_effect.title, sound_effect, class: "fw-semibold" %>
+            <div class="small fg-3"><%= sound_effect.category %></div>
+          </div>
+
+          <% if sound_effect.editable_by?(current_user) %>
+            <div class="hstack gap-2 ms-auto">
+              <%= link_to "Редагувати", edit_sound_effect_path(sound_effect), class: "btn-subtle theme-primary btn-sm" %>
+              <%= button_to "Видалити", sound_effect, method: :delete,
+                            class: "btn-outline theme-danger btn-sm",
+                            form: { data: { turbo_confirm: "Видалити «#{sound_effect.title}»?" } } %>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <div class="card-body fg-3">Користувач ще не додав жодного звукового ефекту.</div>
+  <% end %>
+</div>
+
